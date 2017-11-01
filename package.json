@@ -1,0 +1,33 @@
+{
+  "name": "dairy",
+  "version": "1.0.0",
+  "description": "A personal dairy with encryption",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uvsankar/dairy.git"
+  },
+  "keywords": [
+    "diary",
+    "encryption"
+  ],
+  "author": "uvsankar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uvsankar/dairy/issues"
+  },
+  "homepage": "https://github.com/uvsankar/dairy#readme",
+  "dependencies": {
+    "co": "^4.6.0",
+    "co-lodash": "0.0.5",
+    "debug": "^3.1.0",
+    "hapi": "^16.6.2",
+    "hapi-swagger": "^8.0.0",
+    "inert": "^4.2.1",
+    "prettyjson": "^1.2.1",
+    "vision": "^4.1.1"
+  }
+}

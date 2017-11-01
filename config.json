@@ -1,0 +1,14 @@
+{
+    "server": {
+        "host": "localhost",
+        "port": "8080"
+    },
+    "location": "/Users/savaradarajan/.dairy",
+    "key": "sankar",
+    "swagger": {
+        "info": {
+            "title": "Test API Documentation",
+            "version": "1.0.0"
+        }
+    }
+}
