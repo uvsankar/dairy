@@ -15,6 +15,7 @@ server.connection(Config.server);
 
 new APIHandler(Config, dependency).registerRoutes(server);
 
+
 server.register([
     Inert,
     Vision,
@@ -22,6 +23,15 @@ server.register([
         'register': HapiSwagger,
         'options': Config.swagger
     }], (err) => {
+        server.route({
+            method: 'GET',
+            path: '/{param*}',
+            handler: {
+                directory: {
+                    path: 'UI'
+                }
+            }
+        })
         server.start((err) => {
             if (err) {
                 throw err;

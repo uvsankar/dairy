@@ -1,0 +1,51 @@
+body{
+    
+        margin: 0px;
+        border-top: 5px solid #43A047;
+        font-size:medium;
+    }
+    header{
+        font-family:"Josefin Sans","Raleway",sans-serif;
+        font-weight: 300;
+        //font-variant: small-caps;
+        font-size: 300%;
+        text-align: center;
+        padding: 25px;
+    }
+    #info{
+        padding: 5px;
+        font-size: 40%;
+        font-family:"Merriweather",serif;
+        color: gray;
+        font-weight: 300;
+    }
+    p{
+        text-indent: 20px;
+    }
+    p:first-of-type {
+        initial-letter: 3;
+        text-indent: 0px;	
+    }
+    p:first-of-type::first-letter {
+        initial-letter: 3;
+        text-indent: 0px;	
+    }
+    
+    main{
+        font-size:120%;
+        font-family: "Raleway",sans-serif;
+        color: rgb(100,100,100);
+        font-weight: 400;
+        width: 66%;
+        line-height: 160%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #dropcap{
+        color: #43A047;
+    }
+    p a{
+        color: black;
+        border-bottom:1px dotted black;
+        text-decoration: none;
+    }

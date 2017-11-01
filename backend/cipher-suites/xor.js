@@ -9,10 +9,10 @@ function xorStrings(payload, key){
 }
 module.exports = {
     encrpt: function(payload, key, options={}){
-        return  new Buffer(xorStrings(payload, key), 'utf8').toString('utf8');
+        return  new Buffer(xorStrings(payload, key), 'utf8').toString('base64');
     },
     decrypt: function(payload, key, options={}){
-        payload = new Buffer(payload, 'utf8').toString('utf8');
+        payload = new Buffer(payload, 'base64').toString('utf8');
         return xorStrings(payload, key);
     }
 }
