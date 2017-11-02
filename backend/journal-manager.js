@@ -15,6 +15,7 @@ class JournalManager extends BaseClass {
         const me = this;
         try{
             payload.data = cipher.encrpt(payload.data, me.config.key);
+            me.log(scope, 'createJournalEntry', `Creating journal entry on [ ${id} ]`);       
             return await me.accessor.createJournalEntry(journal, id, payload);
         } catch (err) {
             me.error(scope, 'createJournal', err);
@@ -25,6 +26,7 @@ class JournalManager extends BaseClass {
     async getJournalEntry(journal, id) {
         const me = this;
         try {
+            me.log(scope, 'getJournalEntry', `Fetching journal entry [ ${id} ]`);
             let entry =  await me.accessor.getJournalEntry(journal, id);
             entry.data = cipher.decrypt(entry.data, me.config.key);
             return entry;

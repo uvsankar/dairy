@@ -3,8 +3,8 @@
         "host": "localhost",
         "port": "8080"
     },
-    "location": "/Users/savaradarajan/.dairy",
-    "key": "sankar",
+    "location": ".dairy",
+    "key": "_random_key_",
     "swagger": {
         "info": {
             "title": "API Documentation",
