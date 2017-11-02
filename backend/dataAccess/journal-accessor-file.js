@@ -25,8 +25,9 @@ class JournalAccessorFile extends BaseClass{
             let entryPath = path.join(journalPath, id);
             if(!fs.existsSync(journalPath))
                 fs.mkdirSync(journalPath)
-            else if(fs.existsSync(entryPath))
-                throw new Error(`Entry ${id} already exists`);
+            // Overwrite for now .. until PUT endpoint is exposed
+            // else if(fs.existsSync(entryPath))
+            //     throw new Error(`Entry ${id} already exists`);
             fs.writeFileSync(entryPath, JSON.stringify(data));
             return data;
         } catch (err) {

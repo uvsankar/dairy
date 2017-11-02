@@ -7,7 +7,7 @@
     "key": "sankar",
     "swagger": {
         "info": {
-            "title": "Test API Documentation",
+            "title": "API Documentation",
             "version": "1.0.0"
         }
     }
