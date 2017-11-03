@@ -2,7 +2,8 @@
     Need to develop a proper Single Page Application. 
     until then this is what I can come up with.
     The minimalistic UI was developed by @nithinsanjey.
-    I DONT KNOW TO DESIGN WEBPAGES . PLEASE HELP ME!!!
+    I DONT KNOW TO DESIGN WEBPAGES . 
+    WEB DESIGNERS FEEL FREE TO CONTRIBUTE!!!
 */
 
 $('#info')[0].innerText  = new Date().toDateString();
@@ -40,8 +41,7 @@ if(location.hash){
             $('main')[0].innerHTML = result.data;
             $('h1')[0].innerText = entryId;
 
-            $('main').removeAttr('contenteditable');
-            $('h1').removeAttr('contenteditable');
+            $('[contenteditable]').attr('contenteditable', false)
 
             $('#info')[0].innerText  = new Date(result.createdDate).toDateString();
         })

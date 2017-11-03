@@ -33,12 +33,31 @@ server.register([
         'register': HapiSwagger,
         'options': Config.swagger
     }], (err) => {
+        server.views({
+            engines: {
+                html: require('handlebars')
+            },
+            relativeTo: __dirname,
+            path: 'UI'
+        });
         server.route({
             method: 'GET',
             path: '/{param*}',
             handler: {
                 directory: {
                     path: 'UI'
+                }
+            }
+        })
+        server.route({
+            method: 'GET',
+            path: '/',
+            handler: {
+                view: {
+                    template: 'index',
+                    context: {
+                        config: Config
+                    }
                 }
             }
         })
