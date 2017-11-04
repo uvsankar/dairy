@@ -1,5 +1,5 @@
 module.exports = {
-    cipher: {
+    Cipher: {
         XOR: "xor",
         AES: "aes"
     }

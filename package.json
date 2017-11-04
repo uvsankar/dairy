@@ -28,6 +28,7 @@
     "hapi-swagger": "^8.0.0",
     "inert": "^4.2.1",
     "prettyjson": "^1.2.1",
+    "shortid32": "^0.1.1",
     "vision": "^4.1.1"
   }
 }

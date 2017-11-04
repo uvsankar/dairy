@@ -2,6 +2,10 @@ const BaseClass = require('./base-class'),
     Accessor = require('./dataAccess/journal-accessor-file'),
     co = require('co'),
     cipher = require('./cipher-suites/xor'),
+    shortid = require('shortid32'),
+    Enum = require('./enum'),
+    _ = require('lodash'),
+    Boom = require('boom'),
     scope = 'JournalManager';
 
 
@@ -11,11 +15,16 @@ class JournalManager extends BaseClass {
         this.accessor = new Accessor(config, dependencies);
     }
 
-    async createJournalEntry(journal, id, payload) {
+    async createJournalEntry(journal, payload) {
         const me = this;
         try{
+            let id = shortid.generate();
+            payload.id = id;
+            if(await me.isPossibleDuplicate(journal, payload))
+                throw Boom.conflict(`An entry with title [ ${payload.title} ] already exists`);
             payload.data = cipher.encrpt(payload.data, me.config.key);
-            me.log(scope, 'createJournalEntry', `Creating journal entry on [ ${id} ]`);       
+            payload.cipher = Enum.Cipher.XOR; // Only XOR encryption is supported for now.
+            me.log(scope, 'createJournalEntry', `Creating journal entry on [ ${payload.title} ]`);       
             return await me.accessor.createJournalEntry(journal, id, payload);
         } catch (err) {
             me.error(scope, 'createJournal', err);
@@ -32,6 +41,18 @@ class JournalManager extends BaseClass {
             return entry;
         } catch (err) {
             me.error(scope, 'getJournalEntry', err);
+            throw err;
+        }
+    }
+    
+    async isPossibleDuplicate(journal, entry){
+        const me = this;
+        try {
+            let entries = await me.accessor.getAllEntries(journal);
+            let titles = _.map(entries, 'title');
+            return _.includes(titles, entry.title);
+        } catch (err) {
+            me.error(scope, 'checkForPossibleDuplicate', err, {journal});
             throw err;
         }
     }
