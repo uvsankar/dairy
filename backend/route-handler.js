@@ -11,12 +11,12 @@ class RouteHandler extends BaseClass {
         const me = this;
         server.route({
             method: 'POST',
-            path: '/journal/{journal}/{id}',
+            path: '/journal/{journal}',
             config: {
                 tags: ['api']
             },
             handler: function(request, reply) {
-                me.journalManager.createJournalEntry(request.params.journal, request.params.id, request.payload).then((result)=>{
+                me.journalManager.createJournalEntry(request.params.journal, request.payload).then((result)=>{
                     reply(result);
                 }, (err)=>{
                     reply(err)

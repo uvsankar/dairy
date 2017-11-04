@@ -10,8 +10,8 @@ class BaseClass {
         this.logger.log(message);
     }
 
-    error(scope, method, message, args = {}){
-        this.logger.error(message);
+    error(scope, method, error, args = {}){
+        this.logger.error(error);
     }
 }
 

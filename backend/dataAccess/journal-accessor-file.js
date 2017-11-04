@@ -1,6 +1,8 @@
 const BaseClass = require('../base-class'),
     fs = require('fs'),
     path = require('path'),
+    Boom = require('boom'),
+    _ = require('lodash'),
     scope = 'JournalAccessorFile';
 
 /* 
@@ -25,9 +27,8 @@ class JournalAccessorFile extends BaseClass{
             let entryPath = path.join(journalPath, id);
             if(!fs.existsSync(journalPath))
                 fs.mkdirSync(journalPath)
-            // Overwrite for now .. until PUT endpoint is exposed
-            // else if(fs.existsSync(entryPath))
-            //     throw new Error(`Entry ${id} already exists`);
+            else if(fs.existsSync(entryPath))
+                 throw Boom.conflict(`Entry ${id} already exists`);
             fs.writeFileSync(entryPath, JSON.stringify(data));
             return data;
         } catch (err) {
@@ -41,10 +42,28 @@ class JournalAccessorFile extends BaseClass{
         try {
             let entryPath = path.join(me.parentFolder, journal, id);
             if(!fs.existsSync(entryPath))
-                throw new Error(`Entry ${id} not found`);
+                throw Boom.notFound(`Entry ${id} not found.`);
             return JSON.parse(fs.readFileSync(entryPath, 'ascii'))
         } catch (err) {
             me.error(scope, 'getJournalEntry', err);
+            throw err;
+        }
+    }
+
+    async getAllEntries(journal) {
+        const me = this;
+        try {
+            let journalPath = path.join(me.parentFolder, journal);
+            if(!fs.existsSync(journalPath))
+                throw Boom.notFound(`Journal "${journal}" not found.`)
+            let ids = fs.readdirSync(journalPath);
+            let entries = [];
+            for(let id of ids){
+                entries.push(await me.getJournalEntry(journal, id));
+            }
+            return entries;
+        } catch (err) {
+            me.error(scope, 'getAllEntries', err, {journal});
             throw err;
         }
     }
