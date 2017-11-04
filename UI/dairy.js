@@ -7,7 +7,7 @@
 */
 
 //HACK: Harcoding journal name
-let journalName = 'Test';
+let journalName = 'Personal';
 
 $('#info')[0].innerText  = new Date().toDateString();
 let baseUrl = 'http://localhost:8080';
