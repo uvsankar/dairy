@@ -43,7 +43,7 @@ class JournalAccessorFile extends BaseClass{
             let entryPath = path.join(me.parentFolder, journal, id);
             if(!fs.existsSync(entryPath))
                 throw Boom.notFound(`Entry ${id} not found.`);
-            return JSON.parse(fs.readFileSync(entryPath, 'ascii'))
+            return JSON.parse(fs.readFileSync(entryPath, 'utf8'))
         } catch (err) {
             me.error(scope, 'getJournalEntry', err);
             throw err;
