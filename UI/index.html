@@ -1,6 +1,6 @@
-
 <!Doctype html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<title>{{{config.userName}}}'s Dairy</title>
@@ -8,30 +8,34 @@
 	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
-	<header>
-		{{{config.userName}}}'s Dairy.
-		<div id="info" contenteditable="true"></div>
-    </header>
-    <h1 contenteditable="true"> 
-        <!-- Removing dropcap for now messing with css.. Can anyone fix this-->
-        <!-- <span id="dropcap">T</span>  -->
-        Title</h1>   
-    <br>
-	<main contenteditable="true">
-		<p>
-                  Hello world.
-		</p>
 
-	</main>
-    <script src="../dropcap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="/dairy.js"></script>
-	<!-- <script>
-		var dropcap = document.getElementById("dropcap");
-		window.Dropcap.layout(dropcap, 2);
-	</script> -->
+<body>
+	<section id="headerBar">
+		<header>
+			{{{config.userName}}}'s Dairy.
+			<div id="info" contenteditable="true"></div>
+		</header>
+	</section>
+	<hr>
+	<section id="Title">
+		<div contenteditable="true">
+			<h1>
+				<span class="dropcaps">T</span>his is a test.</h1>
+	</section>
+	<br>
+	<section id="dairyContent">
+		<div contenteditable="true">
+			<p>
+				<span class="dropcaps">H</span>ello world</p>
+		</div>
+	</section>
+	<section id="scripts">
+		<script src="../dropcap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="/dairy.js"></script>
+	</section>
 </body>
 </html>
