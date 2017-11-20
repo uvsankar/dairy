@@ -24,7 +24,7 @@ class JournalManager extends BaseClass {
                 throw Boom.conflict(`An entry with title [ ${payload.title} ] already exists`);
             payload.data = cipher.encrpt(payload.data, me.config.key);
             payload.cipher = Enum.Cipher.XOR; // Only XOR encryption is supported for now.
-            me.log(scope, 'createJournalEntry', `Creating journal entry on [ ${payload.title} ]`);       
+            me.log(scope, 'createJournalEntry', `Creating journal entry on \"${payload.title}\" [${id}]`);       
             return await me.accessor.createJournalEntry(journal, id, payload);
         } catch (err) {
             me.error(scope, 'createJournal', err);
@@ -53,6 +53,28 @@ class JournalManager extends BaseClass {
             return _.includes(titles, entry.title);
         } catch (err) {
             me.error(scope, 'checkForPossibleDuplicate', err, {journal});
+            throw err;
+        }
+    }
+
+    async reEncryptJournal(journal, oldKey, newKey) {
+        const me = this;
+        try {
+            let entries = await me.accessor.getAllEntries(journal);
+            entries = _.map(entries, (i)=>{
+                i.data = cipher.decrypt(i.data, oldKey);
+                return i;
+            })
+            entries = _.map(entries, (i)=>{
+                i.data = cipher.encrpt(i.data, newKey);
+                return i;
+            })
+            for(let entry of entries){
+                await me.accessor.createJournalEntry(journal, entry.id, entry, {override: true});
+            }
+            me.log(scope, 'reEncryptJournal', 'All entries reEncrypted with new key', {journal});
+        } catch (err) {
+            me.error(scope, 'reEncryptJournal', err, {journal});
             throw err;
         }
     }
