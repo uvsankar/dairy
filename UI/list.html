@@ -1,0 +1,8 @@
+<br>
+<main>
+  <ul>
+  {{#each entries}}
+    <li> <a href="http://{{../config.server.host}}:{{../config.server.port}}/journal/{{../config.dairyName}}/{{id}}">{{title}}</a> </li>
+  {{/each}}
+  </ul>
+</main>

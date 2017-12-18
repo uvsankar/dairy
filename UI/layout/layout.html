@@ -1,0 +1,35 @@
+
+<!Doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{{{config.userName}}}'s Dairy</title>
+	<link href='http://fonts.googleapis.com/css?family=Adamina' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header>
+        {{{config.userName}}}'s Dairy.
+        <div id="info" contenteditable="true">{{getTime}}</div>
+	</header>
+  {{{content}}}
+  <script src="../dropcap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+		var Config = {
+			userName:  "{{{config.userName}}}",
+			dairyName: "{{{config.dairyName}}}",
+			server: {
+				baseURL: "http://{{{config.server.host}}}:{{{config.server.port}}}"
+			}
+		}
+		// var dropcap = document.getElementById("dropcap");
+		// window.Dropcap.layout(dropcap, 2);
+	</script>
+    <script src="/dairy.js"></script>
+</body>
+</html>

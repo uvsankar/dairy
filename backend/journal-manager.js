@@ -78,6 +78,20 @@ class JournalManager extends BaseClass {
             throw err;
         }
     }
+
+    //Pagination ??
+    async getIndex(journal){
+        const me  = this;
+        try{
+            let entries = await  me.accessor.getAllEntries(journal);
+            entries = _.map(entries, (i)=>_.pick(i, ['id', 'title', 'createdDate']))
+            entries = _.orderBy(entries, 'createdDate', 'desc')
+            return entries;
+        } catch (err) {
+            me.error(scope, 'getAllEntries', err, {journal, minified});
+            throw err;
+        }
+    }
 }
 
 module.exports = JournalManager

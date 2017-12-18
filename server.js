@@ -34,7 +34,9 @@ function startServer(Config){
                     html: require('handlebars')
                 },
                 relativeTo: __dirname,
-                path: 'UI'
+                layout: 'layout/layout',
+                path: 'UI',
+                helpersPath: 'UI/helpers'
             });
             server.route({
                 method: 'GET',

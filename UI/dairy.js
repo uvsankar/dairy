@@ -8,7 +8,6 @@
 (function () {
     let journalName = Config.dairyName;
 
-    $('#info')[0].innerText = new Date().toDateString();
     let baseUrl = Config.server.baseURL;
 
     function saveJournalEntry(journalName, title, data) {
@@ -34,22 +33,4 @@
         }
 
     });
-
-    function retriveEntry() {
-        let entryId = location.hash.slice(1);
-        if (entryId) {
-            jQuery.get(`${baseUrl}/journal/${journalName}/${entryId}`).done(function (result) {
-                $('#info')[0].innerText = new Date(result.timestamp).toDateString();
-                $('main')[0].innerHTML = result.data;
-                $('h1')[0].innerText = result.title;
-
-                $('[contenteditable]').attr('contenteditable', false)
-
-                $('#info')[0].innerText = new Date(result.createdDate).toDateString();
-            })
-        }
-    }
-    
-    retriveEntry()
-    window.onhashchange = retriveEntry;
 })()
