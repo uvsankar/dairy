@@ -11,7 +11,6 @@ let DefaultConfig = {
         "port": "9090"
     },
     "location": path.join(os.homedir(), ".dairy"),
-    "key": "!!_sOme_r@nd0m_key!!",
     "swagger": {
         "info": {
             "title": "API Documentation",
@@ -20,6 +19,17 @@ let DefaultConfig = {
     },
     "jsonFile": {
         "spaces": 4
+    },
+    "cipherAlgo": "aes-256-ctr",
+    "keyGen":{
+        "salt": "salt",
+        "iterations": 99999,
+        "length": 256,
+        "digest": "sha512"
+    },
+    "aes": {
+        "ivSize": 16,
+        "keySize": 32
     },
     "dairyName": "Personal",
     "userName": "Admin"
@@ -37,7 +47,5 @@ try{
 Config = _.extendWith(Config, userSettings, (objValue, srcValue)=>{
     return _.isEmpty(srcValue) ? objValue : srcValue;
 })
-
-Config.key = _.get(userSettings, 'passwordHash', Config.key);
 
 module.exports = Config;
