@@ -29,7 +29,11 @@ class RouteHandler extends BaseClass {
             method: 'GET',
             path: '/journal/{journal}/{id}',
             config: {
-                tags: ['api']
+                tags: ['api'],
+                cache: {
+                    expiresIn: me.config.cache.expiresIn,
+                    privacy: 'private'
+                }
             },
             handler: function(request, reply) {
                 me.journalManager.getJournalEntry(request.params.journal, request.params.id, request.payload).then((result)=>{

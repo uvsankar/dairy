@@ -17,6 +17,9 @@ let DefaultConfig = {
             "version": "1.0.0"
         }
     },
+    "cache": {
+        "expiresIn": 10000
+    },
     "jsonFile": {
         "spaces": 4
     },

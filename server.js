@@ -45,6 +45,11 @@ function startServer(Config){
                     directory: {
                         path: path.join(__dirname, 'UI')
                     }
+                },
+                config: {
+                    cache: {
+                        expiresIn: 30*60*1000
+                    }
                 }
             })
             server.route({
