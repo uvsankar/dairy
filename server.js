@@ -34,7 +34,9 @@ function startServer(Config){
                     html: require('handlebars')
                 },
                 relativeTo: __dirname,
-                path: 'UI'
+                layout: 'layout/layout',
+                path: 'UI',
+                helpersPath: 'UI/helpers'
             });
             server.route({
                 method: 'GET',
@@ -42,6 +44,11 @@ function startServer(Config){
                 handler: {
                     directory: {
                         path: path.join(__dirname, 'UI')
+                    }
+                },
+                config: {
+                    cache: {
+                        expiresIn: 30*60*1000
                     }
                 }
             })

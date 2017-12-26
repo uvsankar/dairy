@@ -2,7 +2,7 @@
 
 const inquirer = require('inquirer'),
     commander = require('commander'),
-    passwordHash = require('password-hash'),
+    crypto = require('../backend/crypto.js'),
     package = require('../package.json'),
     server = require('../server'),
     program = require('commander'),
@@ -30,7 +30,8 @@ async function checkPassword(storedPassword, retryCount = 0) {
         name: 'password',
         message: 'Dairy PIN: '
     })
-    if (passwordHash.verify(result.password, storedPassword)) {
+    if (crypto.verifyPassword(result.password, storedPassword)) {
+        Config.key = crypto.getKey(result.password)
         return true;
     }
     else {
@@ -39,14 +40,14 @@ async function checkPassword(storedPassword, retryCount = 0) {
     }
 }
 
-async function newPassword() {
+async function getNewPassword() {
     let password = await inquirer.prompt({ type: 'password', name: 'result', message: 'new PIN: ' });
     let confirmedPassword = await inquirer.prompt({ type: 'password', name: 'result', message: 'Confirm PIN: ' });
     if (password.result != confirmedPassword.result) {
         console.log('Try again')
-        await newPassword()
+        await getNewPassword()
     }
-    return passwordHash.generate(password.result);
+    return password.result;
 }
 
 async function init() {
@@ -57,17 +58,17 @@ async function init() {
             name: 'userName',
             message: 'userName: '
         })
-        let passwordHash = await newPassword();
+        let password = await getNewPassword();
         let userSettings = {
             userName,
-            passwordHash
+            passwordHash: crypto.getPasswordHash(password)
         }
         jsonFile.writeFileSync(Config.userSettingsPath, userSettings, { spaces: 4 });
 
         Config = _.extendWith(Config, userSettings, (objValue, srcValue) => {
             return _.isEmpty(srcValue) ? objValue : srcValue;
         })
-        Config.key = Config.passwordHash;
+        Config.key = crypto.getKey(password)
         return true;
     }
     return false;
@@ -94,10 +95,12 @@ program
         let oldPasswordHash = Config.passwordHash;
         console.log('Please enter new passowrd')
 
-        let newPasswordHash = await newPassword();
-        Config.passwordHash = userSettings.passwordHash = newPasswordHash;
+        let newPassword = await getNewPassword();
+        Config.passwordHash = userSettings.passwordHash = crypto.getPasswordHash(newPassword);
+        let oldKey = Config.key;
+        Config.key = crypto.getKey(newPassword);
+        await journalManager.reEncryptJournal(Config.dairyName, oldKey, Config.key);
         jsonFile.writeFileSync(Config.userSettingsPath, userSettings, Config.jsonFile);
-        await journalManager.reEncryptJournal(Config.dairyName, oldPasswordHash, newPasswordHash);
     });
 
 program

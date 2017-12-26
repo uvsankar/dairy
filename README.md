@@ -16,7 +16,11 @@ The project is being actively updated by me.(untill all the basic functionalites
 
 Open localhost:9090 and start writing.
 
+Requires Node 9.0 or greater
+
 For saving the entry press "Ctrl + Shift + s"
 
 # API Documentation
 Please refer localhost:9090/documentation
+
+View all the Entries: localhost:9090/journal/Personal/
