@@ -6,16 +6,24 @@ body{
     }
     header{
         font-family:"Josefin Sans","Raleway",sans-serif;
-        font-weight: 300;
-        font-variant: small-caps;
+        font-weight: 500;
         font-size: 300%;
         text-align: center;
         padding: 25px;
     }
+    #all_entries a{
+        font-size: 50%;
+        font-weight: 500;
+        color: #43A047;
+        float: right;
+        margin-right: 40px;
+        border-bottom:1px dotted #43A047;
+        text-decoration: none;
+    }
     #info{
         padding: 5px;
         font-size: 40%;
-        font-family:"Merriweather",serif;
+        font-family: serif;
         color: gray;
         font-weight: 300;
     }
@@ -34,7 +42,7 @@ body{
     
     main{
         font-size:120%;
-        font-family: "Raleway",sans-serif;
+        font-family: sans-serif, "Raleway";
         color: rgb(100,100,100);
         font-weight: 400;
         width: 66%;
@@ -46,9 +54,8 @@ body{
         margin-left:  auto;
         margin-right: auto;
         color: #43A047;
-        font-family:"Josefin Sans","Raleway",sans-serif;
-        font-variant: small-caps;
-        width: 90%
+        font-family: "Raleway",sans-serif;
+        width: 90%;
     }
     #dropcap{
         color: #43A047;
@@ -57,4 +64,7 @@ body{
         color: black;
         border-bottom:1px dotted black;
         text-decoration: none;
+    }
+    #clear_fix{
+        clear: both;
     }

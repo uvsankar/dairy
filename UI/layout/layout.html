@@ -4,8 +4,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{{config.userName}}}'s Dairy</title>
-	<link href='http://fonts.googleapis.com/css?family=Adamina' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/style.css">
@@ -13,7 +11,9 @@
 
 <body>
     <header>
-        {{{config.userName}}}'s Dairy.
+    	<div id="all_entries"><a href="#">View all my entries</a></div>
+    	<div id="clear_fix"></div>
+        <div>{{{config.userName}}}'s Dairy.</div>
         <div id="info" contenteditable="true">{{getTime}}</div>
 	</header>
   {{{content}}}
