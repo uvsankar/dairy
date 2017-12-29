@@ -11,7 +11,7 @@
 
 <body>
     <header>
-    	<div id="all_entries"><a href="#">View all my entries</a></div>
+    	<div id="all_entries"><a href="{{config.baseURL}}/journal/{{config.dairyName}}">Index</a></div>
     	<div id="clear_fix"></div>
         <div>{{{config.userName}}}'s Dairy.</div>
         <div id="info" contenteditable="true">{{getTime}}</div>
@@ -24,7 +24,7 @@
 			userName:  "{{{config.userName}}}",
 			dairyName: "{{{config.dairyName}}}",
 			server: {
-				baseURL: "http://{{{config.server.host}}}:{{{config.server.port}}}"
+				baseURL: "{{{config.baseURL}}}"
 			}
 		}
 		// var dropcap = document.getElementById("dropcap");
