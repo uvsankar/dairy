@@ -51,7 +51,7 @@ async function getNewPassword() {
 }
 
 async function init() {
-    console.log(Config)
+    //console.log(Config)
     if (!fs.existsSync(Config.userSettingsPath)) {
         let { userName } = await inquirer.prompt({
             type: 'text',
