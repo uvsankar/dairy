@@ -42,6 +42,8 @@ let Config = _.extend(DefaultConfig, {
     userSettingsPath: path.join(DefaultConfig.location, 'user-settings.json')
 })
 
+DefaultConfig.baseURL = `http://${Config.server.host}:${Config.server.port}`
+
 try{
     userSettings =  require(Config.userSettingsPath);
  } catch (err) {
