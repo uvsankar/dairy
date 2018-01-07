@@ -30,6 +30,12 @@ body {
     line-height: 160%;
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0 0 2px #CCC;
+    min-height: 150px;
+    overflow: auto;
+    padding: 1em;
+    margin-top: 20px;
+    outline: none;
 }
 
 #Title {
@@ -41,10 +47,20 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 30px;
-    /* color: #43A047; */
 }
 
 .dropcaps {
+    font-family: 'Berkshire Swash', Helvetica, sans-serif;
+    padding-right: 10px;
+    float: left;
+    font-size: 4.0em;
+    line-height: 0.87em;
+    margin-right: 0.05em;
+    color: #43A047;
+    text-align: justify;
+}
+
+p::first-letter {
     font-family: 'Berkshire Swash', Helvetica, sans-serif;
     padding-right: 10px;
     float: left;
