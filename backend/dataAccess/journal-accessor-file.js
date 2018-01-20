@@ -68,6 +68,10 @@ class JournalAccessorFile extends BaseClass{
             throw err;
         }
     }
+
+    async getJournalList(){
+        return fs.readdirSync(this.parentFolder).filter(f => fs.statSync(path.join(this.parentFolder, f)).isDirectory())
+    }
 }
 
 module.exports = JournalAccessorFile
