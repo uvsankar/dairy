@@ -99,7 +99,7 @@ program
         Config.passwordHash = userSettings.passwordHash = crypto.getPasswordHash(newPassword);
         let oldKey = Config.key;
         Config.key = crypto.getKey(newPassword);
-        await journalManager.reEncryptJournal(Config.dairyName, oldKey, Config.key);
+        await journalManager.reEncryptJournals(oldKey, Config.key);
         jsonFile.writeFileSync(Config.userSettingsPath, userSettings, Config.jsonFile);
     });
 

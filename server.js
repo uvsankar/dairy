@@ -7,6 +7,7 @@ const Hapi = require('hapi'),
     HapiSwagger = require('hapi-swagger'),
     fs = require('fs'),
     path = require('path'),
+    _ = require('lodash'),
     server = new Hapi.Server();
 
 
@@ -62,6 +63,15 @@ function startServer(Config){
                             config: Config
                         }
                     }
+                }
+            })
+            server.route({
+                method: 'GET',
+                path: '/journal/{journal}/new',
+                handler: function(request, reply){
+                    reply.view('index', {
+                        config: _.extend({}, Config, {dairyName: request.params["journal"]})
+                    })
                 }
             })
             server.start((err) => {

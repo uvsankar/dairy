@@ -58,6 +58,7 @@ class RouteHandler extends BaseClass {
                 tags: ['api']
             },
             handler: function(request, reply) {
+                me.config.dairyName = request.params["journal"]; 
                 me.journalManager.getIndex(request.params.journal).then((result)=>{
                     reply.view('list', {
                         entries: result,
