@@ -5,66 +5,89 @@ const Hapi = require('hapi'),
     Inert = require('inert'),
     Vision = require('vision'),
     HapiSwagger = require('hapi-swagger'),
-    path = require('path'),
-    os = require('os'),
     fs = require('fs'),
+    path = require('path'),
+    _ = require('lodash'),
     server = new Hapi.Server();
 
-let dependency = {
-    logger: console
-}
 
-let Config = require('./config');
-
-if(!path.isAbsolute(Config.location))
-    Config.location = path.join(os.homedir(), Config.location);
-
-server.connection(Config.server);
-
-new APIHandler(Config, dependency).registerRoutes(server);
-
-if(!fs.existsSync(Config.location))
-    fs.mkdirSync(Config.location)
+function startServer(Config){
+    let dependency = {
+        logger: console
+    }
+        
+    server.connection(Config.server);
     
-server.register([
-    Inert,
-    Vision,
-    {
-        'register': HapiSwagger,
-        'options': Config.swagger
-    }], (err) => {
-        server.views({
-            engines: {
-                html: require('handlebars')
-            },
-            relativeTo: __dirname,
-            path: 'UI'
-        });
-        server.route({
-            method: 'GET',
-            path: '/{param*}',
-            handler: {
-                directory: {
-                    path: 'UI'
-                }
-            }
-        })
-        server.route({
-            method: 'GET',
-            path: '/',
-            handler: {
-                view: {
-                    template: 'index',
-                    context: {
-                        config: Config
+    new APIHandler(Config, dependency).registerRoutes(server);
+    
+    if(!fs.existsSync(Config.location))
+        fs.mkdirSync(Config.location)
+        
+    server.register([
+        Inert,
+        Vision,
+        {
+            'register': HapiSwagger,
+            'options': Config.swagger
+        }], (err) => {
+            server.views({
+                engines: {
+                    html: require('handlebars')
+                },
+                relativeTo: __dirname,
+                layout: 'layout/layout',
+                path: 'UI',
+                helpersPath: 'UI/helpers'
+            });
+            server.route({
+                method: 'GET',
+                path: '/{param*}',
+                handler: {
+                    directory: {
+                        path: path.join(__dirname, 'UI')
+                    }
+                },
+                config: {
+                    cache: {
+                        expiresIn: 30*60*1000
                     }
                 }
-            }
+            })
+            server.route({
+                method: 'GET',
+                path: '/',
+                handler: {
+                    view: {
+                        template: 'index',
+                        context: {
+                            config: Config
+                        }
+                    }
+                }
+            })
+            server.route({
+                method: 'GET',
+                path: '/journal/{journal}/new',
+                handler: function(request, reply){
+                    reply.view('index', {
+                        config: _.extend({}, Config, {dairyName: request.params["journal"]})
+                    })
+                }
+            })
+            server.start((err) => {
+                if (err) {
+                    throw err;
+                }
+                console.log(`Server running at: ${server.info.uri}`);
+            });
         })
-        server.start((err) => {
-            if (err) {
-                throw err;
-            }
-            console.log(`Server running at: ${server.info.uri}`);
-        });
-    })
+}
+
+let isCLI = !module.parent
+if(isCLI){
+    let Config = require('./config');
+    Config.key = Config.passwordHash;
+    startServer(Config)
+}
+else 
+    module.exports = startServer
