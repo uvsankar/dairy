@@ -24,3 +24,6 @@ For saving the entry press "Ctrl + Shift + s"
 Please refer localhost:9090/documentation
 
 View all the Entries: localhost:9090/journal/Personal/
+
+# Contact
+Please drop a mail if you like this / want to critize me ;P uvsankar94@gmail.com
