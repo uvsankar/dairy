@@ -1,71 +1,78 @@
-body{
-    
-        margin: 0px;
-        border-top: 5px solid #43A047;
-        font-size:medium;
-    }
-    header{
-        font-family:"Josefin Sans","Raleway",sans-serif;
-        font-weight: 500;
-        font-size: 300%;
-        text-align: center;
-        padding: 25px;
-    }
-    #all_entries a{
-        font-size: 50%;
-        font-weight: 500;
-        color: #43A047;
-        float: right;
-        margin-right: 40px;
-        border-bottom:1px dotted #43A047;
-        text-decoration: none;
-    }
-    #info{
-        padding: 5px;
-        font-size: 40%;
-        font-family: serif;
-        color: gray;
-        font-weight: 300;
-    }
-    p{
-        text-indent: 20px;
-        display: inline;
-    }
-    p:first-of-type {
-        initial-letter: 3;
-        text-indent: 0px;	
-    }
-    p:first-of-type::first-letter {
-        initial-letter: 3;
-        text-indent: 0px;	
-    }
-    
-    main{
-        font-size:120%;
-        font-family: sans-serif, "Raleway";
-        color: rgb(100,100,100);
-        font-weight: 400;
-        width: 66%;
-        line-height: 160%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
-    h1{
-        margin-left:  auto;
-        margin-right: auto;
-        color: #43A047;
-        font-family: "Raleway",sans-serif;
-        width: 90%;
-    }
-    #dropcap{
-        color: #43A047;
-    }
-    p a{
-        color: black;
-        border-bottom:1px dotted black;
-        text-decoration: none;
-    }
-    #clear_fix{
-        clear: both;
-    }
+body {
+    margin: 0px;
+    border-top: 5px solid #43A047;
+    font-size: medium;
+}
+
+#headerBar {
+    font-family: "Josefin Sans", "Raleway", sans-serif;
+    font-weight: 300;
+    font-variant: small-caps;
+    font-size: 300%;
+    text-align: center;
+    padding: 25px;
+}
+
+#info {
+    padding: 5px;
+    font-size: 40%;
+    font-family: "Merriweather", serif;
+    color: gray;
+    font-weight: 300;
+}
+
+#dairyContent {
+    font-size: 120%;
+    font-family: "Raleway", sans-serif;
+    color: rgb(100, 100, 100);
+    font-weight: 400;
+    width: 66%;
+    line-height: 160%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 2px #CCC;
+    min-height: 150px;
+    overflow: auto;
+    padding: 1em;
+    margin-top: 20px;
+    outline: none;
+}
+
+#Title {
+    font-size: 120%;
+    color: rgb(100, 100, 100);
+    font-weight: 400;
+    width: 66%;
+    line-height: 160%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 30px;
+}
+
+.dropcaps {
+    font-family: 'Berkshire Swash', Helvetica, sans-serif;
+    padding-right: 10px;
+    float: left;
+    font-size: 4.0em;
+    line-height: 0.87em;
+    margin-right: 0.05em;
+    color: #43A047;
+    text-align: justify;
+}
+
+p::first-letter {
+    font-family: 'Berkshire Swash', Helvetica, sans-serif;
+    padding-right: 10px;
+    float: left;
+    font-size: 4.0em;
+    line-height: 0.87em;
+    margin-right: 0.05em;
+    color: #43A047;
+    text-align: justify;
+}
+
+p a {
+    color: black;
+    border-bottom: 1px dotted black;
+    text-decoration: none;
+}
