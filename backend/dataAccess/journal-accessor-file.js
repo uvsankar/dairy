@@ -3,6 +3,7 @@ const BaseClass = require('../base-class'),
     path = require('path'),
     Boom = require('boom'),
     _ = require('lodash'),
+    jsonFile = require('jsonfile'),
     scope = 'JournalAccessorFile';
 
 /* 
@@ -20,16 +21,16 @@ class JournalAccessorFile extends BaseClass{
         }
     }
 
-    async createJournalEntry(journal, id, data){
+    async createJournalEntry(journal, id, data, options = {}){
         const me = this;
         try{
             let journalPath = path.join(me.parentFolder, journal);
             let entryPath = path.join(journalPath, id);
             if(!fs.existsSync(journalPath))
                 fs.mkdirSync(journalPath)
-            else if(fs.existsSync(entryPath))
+            else if(fs.existsSync(entryPath) && !options.override)
                  throw Boom.conflict(`Entry ${id} already exists`);
-            fs.writeFileSync(entryPath, JSON.stringify(data));
+            jsonFile.writeFileSync(entryPath, data, me.config.jsonFile);               
             return data;
         } catch (err) {
             me.error(scope, 'createJournalEntry', err, {journal, id});
@@ -55,7 +56,7 @@ class JournalAccessorFile extends BaseClass{
         try {
             let journalPath = path.join(me.parentFolder, journal);
             if(!fs.existsSync(journalPath))
-                throw Boom.notFound(`Journal "${journal}" not found.`)
+                return [];
             let ids = fs.readdirSync(journalPath);
             let entries = [];
             for(let id of ids){
@@ -66,6 +67,10 @@ class JournalAccessorFile extends BaseClass{
             me.error(scope, 'getAllEntries', err, {journal});
             throw err;
         }
+    }
+
+    async getJournalList(){
+        return fs.readdirSync(this.parentFolder).filter(f => fs.statSync(path.join(this.parentFolder, f)).isDirectory())
     }
 }
 

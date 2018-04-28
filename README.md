@@ -10,14 +10,17 @@ The project is being actively updated by me.(untill all the basic functionalites
 
 # Setup
 1. Clone the repo
-2. Move to that repo.
-3. Update the username and other fields if neccessary in config.json file.  
+2. Move to that repo.  
 3. Execute 'npm install' 
-4. Execute 'node server.js'
+4. Type the CLI command 'dairy' to start the app server
 
-Open localhost:8080 and start writing.
+Open localhost:9090 and start writing.
+
+Requires Node 9.0 or greater
 
 For saving the entry press "Ctrl + Shift + s"
 
 # API Documentation
-Please refer localhost:8080/documentation
+Please refer localhost:9090/documentation
+
+View all the Entries: localhost:9090/journal/Personal/
