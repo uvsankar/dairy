@@ -28,9 +28,15 @@
     $(document).keypress("s", function (e) {
         if (e.ctrlKey && e.shiftKey) {
             let title = $('h1')[0].innerText
-            let data = $('main')[0].innerText
+            let data = $('main')[0].innerHTML
             saveJournalEntry(journalName, title, data);
         }
 
     });
+
+    InlineEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 })()
