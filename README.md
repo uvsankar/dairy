@@ -1,12 +1,12 @@
 # Dairy
 A Personal dairy with encryption. 
 
-![img](https://preview.ibb.co/kvYzLw/Screen_Shot_2017_11_02_at_11_17_21_PM.png)
+![img](https://user-images.githubusercontent.com/3912595/48458611-14618180-e7ed-11e8-89e9-2f8cbd800472.png)
 
 # Contribution
 
 Feel free to contribute. The only restriction is the UI should be simple.
-The project is being actively updated by me.(untill all the basic functionalites are done!)
+~~The project is being actively updated by me. untill~~ all the basic functionalities are done!
 
 # Setup
 1. Clone the repo
